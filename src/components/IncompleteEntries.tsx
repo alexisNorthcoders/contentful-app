@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { ContentType, PageAppSDK } from '@contentful/app-sdk';
+import { ContentType } from '@contentful/app-sdk';
 import { Box, Paragraph } from '@contentful/f36-components';
 
 import CollectionList from '../components/CollectionList';
-import { useCMA, useSDK } from '@contentful/react-apps-toolkit';
+import { useSDK } from '@contentful/react-apps-toolkit';
 
 // Define rules for incomplete entries.
-const INCOMPLETE_CHECK_CONTENT_TYPE = 'album';
-const INCOMPLETE_CHECK_REQUIRED_FIELD = 'artist';
+const INCOMPLETE_CHECK_CONTENT_TYPE = 'blogPost';
+const INCOMPLETE_CHECK_REQUIRED_FIELD = 'author';
 
 interface IncompleteEntriesProps {
   contentTypes: ContentType[];
@@ -17,8 +17,8 @@ interface IncompleteEntriesProps {
 export default function IncompleteEntries({ contentTypes }: IncompleteEntriesProps) {
   const [incompleteEntries, setIncompleteEntries] = useState<any[] | null>(null);
 
-  const cma = useCMA();
   const sdk = useSDK();
+  const cma = sdk.cma
 
   useEffect(() => {
     async function fetchIncompleteEntries() {
@@ -38,7 +38,7 @@ export default function IncompleteEntries({ contentTypes }: IncompleteEntriesPro
     }
 
     fetchIncompleteEntries();
-  }, []);
+  }, [cma.entry]);
 
   return (
     <Box marginTop="spacingXl">
