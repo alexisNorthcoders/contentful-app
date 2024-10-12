@@ -4,10 +4,12 @@ import { /* useCMA, */ useSDK } from '@contentful/react-apps-toolkit';
 import { useEffect, useState } from 'react';
 import { fetchData } from '../utils/fetchData';
 
+const LOCALE = 'en-US'
 const Field = () => {
 
   const sdk = useSDK<FieldAppSDK>();
-  const [titleCharCount, setTitleCharCount] = useState(0)
+  const [title, setTitle] = useState("")
+  const [author, setAuthor] = useState("")
 
     useEffect(()=>{
     sdk.window.startAutoResizer()
@@ -15,7 +17,8 @@ const Field = () => {
     fetchData(sdk,referencePostField.sys.id)
     .then((data)=>
      { console.log(data)
-      setTitleCharCount(data.fields.title['en-US'].length)
+      setTitle(data.fields.title[LOCALE])
+      setAuthor(data.fields.author[LOCALE])
     })
     
     
@@ -34,7 +37,8 @@ else {
   return <div className='h-fit'>
   <Note>
 <List>
-  <ListItem>Title length: {titleCharCount} </ListItem>
+  <ListItem>Title length: {title.length} </ListItem>
+  <ListItem>Author: {author} </ListItem>
 </List>
    </Note>
    </div>
