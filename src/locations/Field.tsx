@@ -24,6 +24,7 @@ const Field = () => {
             console.log({author})
             setAuthor(author.fields.name[LOCALE])
             setLocation(JSON.stringify(author.fields.location[LOCALE]))
+            sdk.field.setValue({author,location})
           })
           
         })
@@ -42,6 +43,7 @@ const Field = () => {
   else {
 
     return <div className='h-fit'>
+    <div>{JSON.stringify(sdk.field.getValue())}</div>
       <Note>
         <List>
           <ListItem>Title length: {title.length} </ListItem>
