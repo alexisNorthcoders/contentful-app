@@ -10,40 +10,48 @@ const Field = () => {
   const sdk = useSDK<FieldAppSDK>();
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
+  const [location, setLocation] = useState("")
 
-    useEffect(()=>{
+  useEffect(() => {
     sdk.window.startAutoResizer()
-    const referencePostField = sdk.entry.fields.post.getValue()
-    fetchData(sdk,referencePostField.sys.id)
-    .then((data)=>
-     { console.log(data)
-      setTitle(data.fields.title[LOCALE])
-      setAuthor(data.fields.author[LOCALE])
-    })
-    
-    
-  },[sdk])
+    if (sdk.field.type === 'Object') {
+      const referencePostField = sdk.entry.fields.post.getValue()
+      fetchData(sdk, referencePostField.sys.id)
+        .then((post) => {
+          console.log({post})
+          setTitle(post.fields.title[LOCALE])
+          fetchData(sdk, post.fields.author[LOCALE].sys.id).then((author)=>{
+            console.log({author})
+            setAuthor(author.fields.name[LOCALE])
+            setLocation(JSON.stringify(author.fields.location[LOCALE]))
+          })
+          
+        })
+    }
 
-if (sdk.field.type === 'Text'){
-  return (
-    <div className='flex flex-col gap-2'>
-     <TextInput value={sdk.field.getValue()} onChange={(e)=>sdk.field.setValue(e.target.value)}/>
-     <Note className='h-fit w-fit'> This is the {sdk.field.name} field</Note>
-     </div>
-   )
-}
-else {
-  
-  return <div className='h-fit'>
-  <Note>
-<List>
-  <ListItem>Title length: {title.length} </ListItem>
-  <ListItem>Author: {author} </ListItem>
-</List>
-   </Note>
-   </div>
-}
- 
+  }, [sdk])
+
+  if (sdk.field.type === 'Symbol') {
+    return (
+      <div className='flex flex-col gap-2'>
+        <TextInput value={sdk.field.getValue()} onChange={(e) => sdk.field.setValue(e.target.value)} />
+        <Note className='h-fit w-fit'> This is the {sdk.field.name} field</Note>
+      </div>
+    )
+  }
+  else {
+
+    return <div className='h-fit'>
+      <Note>
+        <List>
+          <ListItem>Title length: {title.length} </ListItem>
+          <ListItem>Author: {author} </ListItem>
+          <ListItem>Location: {location} </ListItem>
+        </List>
+      </Note>
+    </div>
+  }
+
 
 };
 
