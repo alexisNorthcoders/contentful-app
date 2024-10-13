@@ -11,7 +11,7 @@ interface BlogSidebarProps {
   sdk: SidebarAppSDK;
 }
 
-export const BlogSidebar = ({sdk}: BlogSidebarProps)  => {
+export const BlogSidebar = ({ sdk }: BlogSidebarProps) => {
 
   // With the field ID we can reference individual fields from an entry
   const bodyField = sdk.entry.fields[BODY_FIELD_ID];

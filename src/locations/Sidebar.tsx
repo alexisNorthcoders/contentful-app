@@ -12,12 +12,12 @@ const METADATA_CONTENT_TYPE_ID = 'metadata';
 const Sidebar = () => {
   const sdk = useSDK<SidebarAppSDK>();
   const contentType = sdk.entry.getSys().contentType.sys.id;
-  
+
   switch (contentType) {
     case BLOG_CONTENT_TYPE_ID: // Assuming 'blog' is the content type ID for blogs
-      return <BlogSidebar sdk={sdk}/>;
+      return <BlogSidebar sdk={sdk} />;
     case METADATA_CONTENT_TYPE_ID:
-      return <MetadataSidebar sdk={sdk}/>;
+      return <MetadataSidebar sdk={sdk} />;
     default:
       return <h1>Default Sidebar</h1>;
   }

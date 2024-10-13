@@ -18,13 +18,14 @@ const Field = () => {
       const referencePostField = sdk.entry.fields.post.getValue()
       fetchData(sdk, referencePostField.sys.id)
         .then((post) => {
-          console.log({post})
-          setTitle(post.fields.title[LOCALE])
+          
+          const title = post.fields.title[LOCALE]
+          setTitle(title)
           fetchData(sdk, post.fields.author[LOCALE].sys.id).then((author)=>{
-            console.log({author})
-            setAuthor(author.fields.name[LOCALE])
+            const authorName = author.fields.name[LOCALE]
+            setAuthor(authorName)
             setLocation(JSON.stringify(author.fields.location[LOCALE]))
-            sdk.field.setValue({author,location})
+            sdk.field.setValue({wordCount: title.length, author: authorName})
           })
           
         })
