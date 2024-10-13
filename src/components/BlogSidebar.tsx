@@ -24,7 +24,7 @@ export const BlogSidebar = ({sdk}: BlogSidebarProps)  => {
 
   return (
     <div className='h-full flex flex-col gap-2 content-center items-center'>
-      <h1 className='font-semibold text-emerald-900 text-xl text-center'>{title}</h1>
+      <h1 className='font-semibold text-emerald-900 text-xl text-center'>Blog Post</h1>
       <Note style={{ marginBottom: '12px' }}>
         Metrics for your blog post:
         <List style={{ marginTop: '12px' }}>

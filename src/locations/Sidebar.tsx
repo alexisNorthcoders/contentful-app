@@ -4,6 +4,7 @@ import { /* useCMA, */ useSDK } from '@contentful/react-apps-toolkit';
 import { readingTime } from '../utils/readingTime';
 import { useFieldUpdate } from '../utils/useFieldUpdate';
 import { BlogSidebar } from '../components/BlogSidebar';
+import { MetadataSidebar } from '../components/MetadataSideBar';
 
 const BLOG_CONTENT_TYPE_ID = 'blogPost';
 const METADATA_CONTENT_TYPE_ID = 'metadata';
@@ -16,7 +17,7 @@ const Sidebar = () => {
     case BLOG_CONTENT_TYPE_ID: // Assuming 'blog' is the content type ID for blogs
       return <BlogSidebar sdk={sdk}/>;
     case METADATA_CONTENT_TYPE_ID:
-      return (<Note>Test METADATA SIDEBAR</Note>);
+      return <MetadataSidebar sdk={sdk}/>;
     default:
       return <h1>Default Sidebar</h1>;
   }
