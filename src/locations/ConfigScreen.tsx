@@ -1,12 +1,15 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { ConfigAppSDK } from '@contentful/app-sdk';
-import { Heading, Form, Paragraph, Flex } from '@contentful/f36-components';
+import { Heading, Form, Paragraph, Flex, FormControl, TextInput } from '@contentful/f36-components';
 import { /* useCMA, */ useSDK } from '@contentful/react-apps-toolkit';
+import { css } from 'emotion';
 
-export interface AppInstallationParameters {}
+export interface AppInstallationParameters {
+  apiKey: string | undefined;
+ }
 
 const ConfigScreen = () => {
-  const [parameters, setParameters] = useState<AppInstallationParameters>({});
+  const [parameters, setParameters] = useState<AppInstallationParameters>({apiKey: ''});
   const sdk = useSDK<ConfigAppSDK>();
   /*
      To use the cma, inject it as follows.
@@ -56,12 +59,18 @@ const ConfigScreen = () => {
   }, [sdk]);
 
   return (
-    <Flex flexDirection="column" className='flex-col m-20 max-w-full bg-slate-200 rounded'>
-      <Form>
-        <Heading>Blog Post Metrics Config</Heading>
-        <Paragraph>Welcome to the blog metrics app. This app is used on the sidebar of your blog model.</Paragraph>
-      </Form>
-    </Flex>
+    <Flex flexDirection="column" className={css({ margin: '80px', maxWidth: '800px' })}>
+     <Form>
+     <FormControl>
+       <FormControl.Label>API Key</FormControl.Label>
+       <TextInput
+         value={parameters.apiKey}
+         type='text'
+         onChange={(e) => setParameters({...parameters, apiKey:e.target.value})}
+       />
+       </FormControl>
+     </Form>
+   </Flex>
   );
 };
 

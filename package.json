@@ -6,13 +6,16 @@
     "@contentful/app-sdk": "^4.29.1",
     "@contentful/f36-components": "4.74.0",
     "@contentful/f36-tokens": "4.1.0",
+    "@contentful/field-editor-rich-text": "^3.28.0",
     "@contentful/react-apps-toolkit": "1.2.16",
     "contentful-management": "10.46.4",
     "emotion": "10.0.27",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-router-dom": "^6.27.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "slate": "^0.110.2",
+    "slate-react": "^0.110.2"
   },
   "scripts": {
     "start": "cross-env BROWSER=none PORT=4000 react-scripts start",
